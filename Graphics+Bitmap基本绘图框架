@@ -1,0 +1,29 @@
+
+
+//Graphics+Bitmap基本绘图框架：
+private void button121_Click(object sender, EventArgs e)
+{
+    //初始化变量与对象：==============================            
+    int width = pictureBox1.Width;
+    int height = pictureBox1.Height;
+    float xOrg = pictureBox1.Width / 2f;
+    float yOrg = pictureBox1.Height / 2f;
+    //创建Bitmap实例：
+    Bitmap imgShw = new Bitmap(width, height);
+    //创建Graphics实例：
+    Graphics gs = Graphics.FromImage(imgShw);
+    gs.Clear(Color.White);/*白色背景*/
+    //创建画笔与画刷：
+    Pen pen1=   new Pen(Color.FromArgb(4,4,244), 5);
+    Brush bh1 = new SolidBrush(Color.FromArgb(4, 244, 4));
+    /************************************************/
+
+    //==============================
+    gs.FillEllipse(bh1,xOrg-10,yOrg-10, 20, 20);
+    gs.DrawEllipse(pen1, xOrg - 16, yOrg - 16, 32, 32);
+    gs.DrawString("---By daode1212", new Font("", 18f), bh1, width / 8, height - 45);
+
+
+    //绘制到控件上：==========================================
+    pictureBox1.Image = imgShw;
+}
