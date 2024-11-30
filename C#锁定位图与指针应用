@@ -1,0 +1,30 @@
+
+
+//锁定位图与指针应用：
+unsafe  private void button888_Click(object sender, EventArgs e)
+{
+    int width=800, height = 800;
+    int x0 = 0, y0 = 0;
+    Bitmap img = new Bitmap(width, height);
+    //=====================================
+    BitmapData data = img.LockBits(
+        new Rectangle(x0, y0, width, height),
+        ImageLockMode.ReadWrite,
+        System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+    var ptr = (byte*)data.Scan0.ToPointer();
+    //=====================================
+    for (int y = 0; y < data.Height; y++)
+    {
+        for (int x = 0; x < data.Width; x++)
+        {
+              ptr[y * data.Stride + x * 3] = (byte)0;//Blue
+              ptr[y * data.Stride + x * 3 + 1] = (byte)0;//Green
+              ptr[y * data.Stride + x * 3 + 2] = (byte)0;//Red
+        }
+    }
+    img.UnlockBits(data);
+
+    //===============================
+    pictureBox1.Image = img;
+}
+
